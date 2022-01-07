@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +29,7 @@ public class Inventory {
     }
 
     /**
-     * Removes the item with key itemName from the inventory if it exists.
+     * Removes the item with key itemName from the inventory if it exists
      * @param itemName the name of the item to be removed
      * @return true if the item exists and was removed, false otherwise
      */
@@ -36,12 +38,15 @@ public class Inventory {
     }
 
     /**
-     * Returns a string representation of the item in the inventory with itemName as its name.
-     * @param itemName the name of the item that is to be viewed
-     * @return a string representation of the item in the inventory with itemName as its name.
+     * Returns a list of string representations of the items in the inventory
+     * @return a list of string representations of the items in the inventory
      */
-    public String viewItem(String itemName){
-        return items.get(itemName).toString();
+    public ArrayList<String> viewItems(){
+        ArrayList<String> itemList = new ArrayList<>();
+        for(String itemName: this.items.keySet()){
+            itemList.add(this.items.get(itemName).toString());
+        }
+        return itemList;
     }
 
     /**
