@@ -65,4 +65,12 @@ public class Item {
         this.dateModified = LocalDateTime.now();
     }
 
+    @Override
+    public String toString(){
+        return "Item Name: " + this.name + "\n" +
+                        "Item Quantity: " + this.quantity + "\n" +
+                        "Date Created: " + this.dateEntered.toString() + "\n" +
+                        "Date Modified: " + this.dateModified.toString();
+    }
+
 }
