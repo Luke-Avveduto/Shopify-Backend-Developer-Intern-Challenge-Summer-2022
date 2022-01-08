@@ -1,6 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,11 +13,14 @@ public class Inventory {
     //All items in the inventory will be stored in here with the key being the item's name as a String.
     private final Map<String, Item> items;
 
+    private List<Shipment> outgoingShipments;
+
     /**
      * Creates a new instance of the inventory class.
      */
     public Inventory(){
         this.items = new HashMap<>();
+        this.outgoingShipments = new ArrayList<>();
     }
 
     /**
@@ -56,5 +59,22 @@ public class Inventory {
      */
     public void editItemQuantity(String itemName, int newQuantity){
         this.items.get(itemName).setQuantity(newQuantity);
+    }
+
+    /**
+     * Returns the item in the inventory with the name itemName, given it exists in the first place
+     * @param itemName the name of the item to be returned
+     * @return the Item with name itemName, if it exists
+     */
+    public Item getItem(String itemName){
+        return this.items.get(itemName);
+    }
+
+    /**
+     * Adds a shipment to the outgoing shipment list
+     * @param shipment the shipment to be added to the list
+     */
+    public void addShipment(Shipment shipment){
+        this.outgoingShipments.add(shipment);
     }
 }
