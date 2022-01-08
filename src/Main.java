@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +22,8 @@ public class Main {
             System.out.println("Enter 2 to remove an item");
             System.out.println("Enter 3 to modify an existing item");
             System.out.println("Enter 4 to view all existing items");
-            System.out.println("Enter 5 to quit");
+            System.out.println("Enter 5 to create a shipment");
+            System.out.println("Enter 6 to quit");
             System.out.println("What would you like to do: ");
             int input = s.nextInt();
 
@@ -37,10 +40,56 @@ public class Main {
                     manager.addEvent(new ViewItemsEvent());
                     break;
                 case 5:
+                    manager.addEvent(shipmentCreationDialog(s));
+                    break;
+                case 6:
                     running = false;
             }
 
         }
+    }
+    /**
+     * This method asks the user for the information needed to create a shipment
+     * @param s the scanner used to interact with the user
+     * @return An ItemShipmentEvent that will trigger the creation of the shipment outlined by the user
+     */
+    private static Event shipmentCreationDialog(Scanner s) {
+        boolean creatingShipment = true;
+        String itemName;
+        int itemQuantity;
+        List<String> itemNames = new ArrayList<>();
+        List<Integer> itemAmounts = new ArrayList<>();
+
+        String origin;
+        String destination;
+
+        System.out.println("Enter the address of the destination of the shipment");
+        destination = s.next();
+        s.next();
+        System.out.println("Enter the address of the origin of the shipment");
+        origin = s.next();
+
+        while(creatingShipment){
+            System.out.println("Enter the name of the item you wish to include in the shipment:");
+            itemName = s.next();
+            System.out.println("Enter the number of that item you wish to include in the shipment:");
+            itemQuantity = s.nextInt();
+
+            itemNames.add(itemName);
+            itemAmounts.add(itemQuantity);
+
+            System.out.println("Too continue adding items to the shipment, enter 0, if you are finished, enter 1");
+            creatingShipment = s.nextInt() == 0;
+        }
+        String[] itemNamesArray = new String[itemNames.size()];
+        int[] itemAmountsArray = new int[itemAmounts.size()];
+        itemNames.toArray(itemNamesArray);
+
+        for(int i = 0; i < itemAmountsArray.length; i++){
+            itemAmountsArray[i] = itemAmounts.get(i);
+        }
+
+        return new ItemShipmentEvent(itemNamesArray, itemAmountsArray, destination, origin);
     }
 
     /**
