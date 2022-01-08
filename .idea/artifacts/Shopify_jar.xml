@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Shopify:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Shopify_jar</output-path>
+    <root id="archive" name="Shopify.jar">
+      <element id="module-output" name="Shopify" />
+    </root>
+  </artifact>
+</component>
